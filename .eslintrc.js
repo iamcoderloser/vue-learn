@@ -25,7 +25,21 @@ module.exports = {
         'generator-star-spacing': 'off',
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        "indent": ["error", "space"],
-        'no-trailing-spaces': ["error", { "skipBlankLines": true }]
+        'indent': ["error", 2],
+        'no-trailing-spaces': ["error", { "skipBlankLines": true }],
+        "array-bracket-spacing": ["error", "always"],
+        "key-spacing": ["error", { "beforeColon": true }],
+        "space-before-function-paren": ["error", "always"],
+        // or
+        "space-before-function-paren": ["error", {
+            "anonymous": "always",
+            "named": "always",
+            "asyncArrow": "always"
+        }],
+        "dot-location": ["error", "object"],
+        "beforeColon": true,
+        "afterColon": true,
+        "align": "value",
+        "quotes": ["error", "backtick", { "avoidEscape": true }]
     }
 }

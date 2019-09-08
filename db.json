@@ -1,0 +1,62 @@
+{
+  "test": [
+    "hello json server"
+  ],
+  "users": [
+    {
+      "name": "Henry",
+      "phone": "333-444-555",
+      "email": "henry@133.com",
+      "education": "博士",
+      "age": 28,
+      "graduationSchool": "清华",
+      "job": "未知",
+      "id": 4,
+      "profile": "未填写"
+    },
+    {
+      "name": "Bucky",
+      "phone": "333-444-555",
+      "email": "bucky@133.com",
+      "education": "硕士",
+      "age": "26",
+      "graduationSchool": "清华",
+      "job": "未知",
+      "id": 2,
+      "profile": "未填写"
+    },
+    {
+      "name": "Mr SB",
+      "phone": "333-444-555",
+      "email": "sb@163.com",
+      "education": "小学生",
+      "graduationSchool": "家里蹲",
+      "job": "未知",
+      "id": 3,
+      "age": 35,
+      "profile": "未填写"
+    },
+    {
+      "name": "Elyse",
+      "phone": "333-444-555",
+      "email": "elyse@qq.com",
+      "education": "博士后",
+      "graduationSchool": "农大",
+      "job": "未知",
+      "id": 1,
+      "age": 45,
+      "profile": "未填写"
+    },
+    {
+      "name": "fdasdfs",
+      "phone": "fdafds",
+      "email": "fdasfdas",
+      "education": "fdasfds",
+      "age": 0,
+      "graduationSchool": "fdasdfs",
+      "job": "fdasdfs",
+      "profile": "fdasfda",
+      "id": 5
+    }
+  ]
+}
