@@ -1,6 +1,5 @@
 <template>
-  <div class="addcustomer container">
-    <Alert v-if="alert" :message="alert" />
+  <div class="editcustomer container">
     <h1 class="page-header">添加用户</h1>
     <!-- <form method="post" >
         
@@ -44,7 +43,7 @@
           class="form-control"
           id="edu_background"
           placeholder="请输入学历"
-          v-model="customer.edu_background"
+          v-model="customer.education"
         />
       </div>
       <div class="form-group">
@@ -54,7 +53,7 @@
           class="form-control"
           id="graduate_school"
           placeholder="请输入毕业学校"
-          v-model="customer.graduate_school"
+          v-model="customer.graduationSchool"
         />
       </div>
       <div class="form-group">
@@ -70,85 +69,64 @@
           rows="10"
           id="personal_resume"
           placeholder="请输入个人简历"
-          v-model="customer.personal_resume"
+          v-model="customer.profile"
         />
       </div>
 
-      <button type="submit" @click="addCustomer" class="btn btn-primary">添加</button>
+      <button type="submit" @click="updateCustomer()" class="btn btn-primary">修改</button>
     </div>
   </div>
 </template>
 
 <script>
-// import func from '../../vue-temp/vue-editor-bridge';
-import Alert from "./Alert";
 export default {
-  name: "addcustomer",
+  name: "editcustomer",
   data() {
     return {
-      customer: {
-        name: "",
-        phone: "",
-        email: "",
-        education: "",
-        age: 0,
-        graduationSchool: "",
-        job: "",
-        profile: ""
-      },
-      alert: ""
+      customer: {}
     };
   },
   methods: {
-    addCustomer(e) {
-      //   debugger;
-      if (!this.customer.name || !this.customer.phone || !this.customer.email) {
-        alert("必填信息未填");
-      } else {
-        var newCustomer = {
-          name: this.customer.name,
-          phone: this.customer.phone,
-          email: this.customer.email,
-          education: this.customer.edu_background,
-          age: 0,
-          graduationSchool: this.customer.graduationSchool,
-          job: this.customer.job,
-          profile: this.customer.personal_resume
-        };
+    fetchCusetomer(id) {
+      this.$http
+        .get("http://localhost:3000/users/" + id)
+        .then(function(res) {
+          this.customer = res.body;
+        })
+        .catch(function(err) {});
+    },
+    updateCustomer() {
+      var newCustomer = {
+        name: this.customer.name,
+        phone: this.customer.phone,
+        email: this.customer.email,
+        education: this.customer.education,
+        age: 0,
+        graduationSchool: this.customer.graduationSchool,
+        job: this.customer.job,
+        profile: this.customer.profile
+      };
 
-        this.$http
-          .post("http://localhost:3000/users", newCustomer)
-          .then(function(res) {
-            // alert(JSON.stringify(res.body));
-            this.$router.push({
-              path: "/",
-              query: { alert: "用户信息添加成功！" }
-            });
-          })
-          .catch(function(err) {});
-      }
+      this.$http
+        .put(
+          "http://localhost:3000/users/" + this.$route.params.id,
+          newCustomer
+        )
+        .then(function(res) {
+          this.$route.push({
+            path: "/",
+            query: { alert: "用户数据给更新成功！" }
+          });
+        })
+        .catch(function(err) {});
     }
   },
-  updated: function() {},
-  components: { Alert }
+  created() {
+    this.fetchCusetomer(this.$route.params.id);
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

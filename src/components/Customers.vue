@@ -1,5 +1,6 @@
 <template>
   <div class="customers container">
+    <Alert v-if="alert" :message="alert" />
     <h1 class="page-header">用户管理系统</h1>
     <table class="table table-striped">
       <thead>
@@ -17,7 +18,9 @@
           <td>{{customer.name}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.email}}</td>
-          <td></td>
+          <td>
+            <router-link class="btn btn-default" :to="'/customerdetail/' + customer.id">详情</router-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -25,40 +28,42 @@
 </template>
 
 <script>
-export default { 
-  name: 'customers',
-  data () {
+import Alert from "./Alert";
+
+export default {
+  name: "customers",
+  data() {
     return {
-      customers: []
+      customers: [],
+      alert: ""
+    };
+  },
+  methods: {
+    fetchCusetomers() {
+      this.$http
+        .get("http://localhost:3000/users")
+        .then(function(res) {
+          this.customers = res.body;
+        })
+        .catch(function(err) {});
     }
   },
-  methods:{
-    fetchCusetomers() {
-      this.$http.get("http://localhost:3000/users").then(function(res){
-        this.customers = res.body;
-      }).catch(function(err){})
+  created: function() {
+    if (this.$route.query.alert) {
+      this.alert = this.$route.query.alert;
+      this.$route.query.alert = "";
     }
   },
   mounted() {
     this.fetchCusetomers();
+  },
+  updated: function() {},
+  components: {
+    Alert
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

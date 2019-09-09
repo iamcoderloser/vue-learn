@@ -7,6 +7,8 @@ import VueResource from 'vue-resource'
 import Customers from './components/Customers'
 import AboutUs from './components/AboutUs'
 import AddCustomer from './components/AddCustomer'
+import CustomerDetail from './components/CustomerDetail'
+import EditCustomer from './components/EditCustomer'
 
 // import App from './App'
 
@@ -14,12 +16,26 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 const router = new VueRouter({
-    mode: `history`,
+    mode: 'history',
     base: __dirname,
-    routes: [
-        { 'path': `/`, component: Customers },
-        { 'path': `/aboutus`, component: AboutUs },
-        { 'path': '/addcustomer', component: AddCustomer }
+    routes: [{
+            'path': '/',
+            component: Customers
+        },
+        {
+            'path': '/aboutus',
+            component: AboutUs
+        },
+        {
+            'path': '/addcustomer',
+            component: AddCustomer
+        }, {
+            'path': '/customerdetail/:id',
+            component: CustomerDetail
+        }, , {
+            'path': '/editcustomer/:id',
+            component: EditCustomer
+        }
     ]
 })
 
