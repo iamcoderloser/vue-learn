@@ -3,19 +3,23 @@
 import Vue from 'vue'
 
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import Customers from './components/Customers'
 import AboutUs from './components/AboutUs'
+import AddCustomer from './components/AddCustomer'
 
 // import App from './App'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: `history`,
     base: __dirname,
     routes: [
-        { 'path': '/', component: Customers },
-        { 'path': '/aboutus', component: AboutUs }
+        { 'path': `/`, component: Customers },
+        { 'path': `/aboutus`, component: AboutUs },
+        { 'path': '/addcustomer', component: AddCustomer }
     ]
 })
 
@@ -43,10 +47,15 @@ new Vue({
                 <li ><router-link to="/aboutus">关于我们</router-link></li>
                 
               </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li ><router-link to="/addcustomer">添加用户</router-link></li>
+                
+                
+              </ul>
             </div><!--/.nav-collapse -->
           </div>
         </nav>
         <router-view></router-view>
       </div>
     `
-}).$mount('#app')
+}).$mount(`#app`)
