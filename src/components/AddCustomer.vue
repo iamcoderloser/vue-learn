@@ -103,7 +103,7 @@ export default {
     addCustomer(e) {
       //   debugger;
       if (!this.customer.name || !this.customer.phone || !this.customer.email) {
-        alert("必填信息未填");
+        this.alert = "请填写对应的信息！";
       } else {
         var newCustomer = {
           name: this.customer.name,

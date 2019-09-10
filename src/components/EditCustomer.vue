@@ -1,6 +1,8 @@
 <template>
   <div class="editcustomer container">
-    <h1 class="page-header">添加用户</h1>
+    <router-link class="btn btn-default" :to="'/customerdetail/'+ customer.id">返回</router-link>
+    <Alert v-if="alert" :message="alert"></Alert>
+    <h1 class="page-header">编辑用户</h1>
     <!-- <form method="post" >
         
         
@@ -79,12 +81,17 @@
 </template>
 
 <script>
+import Alert from "./Alert";
 export default {
   name: "editcustomer",
   data() {
     return {
-      customer: {}
+      customer: {},
+      alert: ""
     };
+  },
+  components: {
+    Alert
   },
   methods: {
     fetchCusetomer(id) {
@@ -96,6 +103,10 @@ export default {
         .catch(function(err) {});
     },
     updateCustomer() {
+      if (!this.customer.name || !this.customer.phone || !this.customer.email) {
+        this.alert = "请填写对应的信息！";
+        return;
+      }
       var newCustomer = {
         name: this.customer.name,
         phone: this.customer.phone,
@@ -113,10 +124,11 @@ export default {
           newCustomer
         )
         .then(function(res) {
-          this.$route.push({
-            path: "/",
-            query: { alert: "用户数据给更新成功！" }
-          });
+          //   this.$router.push({
+          //     path: "/",
+          //     query: { alert: "用户数据给更新成功！" }
+          //   });
+          this.alert = "用户数据给更新成功！";
         })
         .catch(function(err) {});
     }

@@ -1,5 +1,8 @@
 <template>
-  <div class="aboutus container">aboutus</div>
+  <div class="aboutus container">
+    <h2>这是一个简单的Vue后台管理系统，仅供学习用！</h2>
+    <h4>lyn 6428727828@qq.com 2019-09-10</h4>
+  </div>
 </template>
 
 <script>
